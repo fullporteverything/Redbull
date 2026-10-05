@@ -3,32 +3,39 @@
 import { useState } from "react";
 import { EDITIONS, PACKS } from "@/lib/data";
 
-const euro = new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR" });
-
-const LINES: Record<string, string> = {
-  classic: "Vitalizes body and mind",
-  red: "Summer, all year",
-  blue: "Deep fruit, clean finish",
-  yellow: "Bright fruit, loud can",
+const TAGLINES: Record<string, string> = {
+  classic: "The one that started it.",
+  red: "Summer, any month.",
+  blue: "Dark fruit, clean finish.",
+  yellow: "Loud fruit, cold can.",
+};
+const TINTS: Record<string, string> = {
+  classic: "#d8d9df",
+  red: "#f1d2d4",
+  blue: "#d5d8e6",
+  yellow: "#f1e6c2",
 };
 
 function Product({ k }: { k: number }) {
   const e = EDITIONS[k];
+  const packs = PACKS.slice(0, 2);
   const [pack, setPack] = useState(0);
   const [added, setAdded] = useState(false);
-  const p = PACKS[pack];
+  const p = packs[pack];
   return (
-    <article className="product reveal" style={{ "--tint": e.tint, transitionDelay: `${k * 80}ms` } as React.CSSProperties}>
+    <article className="product reveal" style={{ "--tint": TINTS[e.key], "--d": `${k * 120}ms` } as React.CSSProperties}>
       <div className="product__media">
         <img src={e.img} alt={`${e.name} can`} loading="lazy" draggable={false} />
+        <span className="product__shadow" aria-hidden />
       </div>
       <p className="product__title">
-        <span className="t-code">{e.code}</span>
+        <span className="product__code">{e.code}</span>
         <span className="product__name">{e.name}</span>
       </p>
-      <p className="product__line">{LINES[e.key]}</p>
+      <p className="product__flavor">{e.flavor}</p>
+      <p className="product__line">{TAGLINES[e.key]}</p>
       <div className="packs" role="radiogroup" aria-label="Pack size">
-        {PACKS.map((pk, n) => (
+        {packs.map((pk, n) => (
           <button
             key={pk.size}
             type="button"
@@ -42,9 +49,10 @@ function Product({ k }: { k: number }) {
         ))}
       </div>
       <p className="product__price">
-        <b>{euro.format(p.price)}</b>
-        <span>/ {p.size} cans</span>
+        <b className="tabular-nums">€{p.price.toFixed(2)}</b>
+        <span>EUR</span>
       </p>
+      <p className="product__save">Subscribe and save 15%</p>
       <button
         type="button"
         className={`product__add ${added ? "is-added" : ""}`}
@@ -55,6 +63,9 @@ function Product({ k }: { k: number }) {
       >
         <span>{added ? "Added" : "Add to cart"}</span>
       </button>
+      <a href="#shop" className="product__sub" onClick={(ev) => ev.preventDefault()}>
+        Subscribe weekly <span aria-hidden>→</span>
+      </a>
     </article>
   );
 }
@@ -62,18 +73,12 @@ function Product({ k }: { k: number }) {
 export default function Shop() {
   return (
     <section id="shop" className="shop">
-      <header className="shop__head">
-        <div>
-          <p className="eyebrow reveal text-[var(--ink-2)]">
-            <b className="text-[var(--ink)]">07</b>
-            <i />
-            Shop
-          </p>
-          <h2 className="shop__title t-serif reveal">
-            Order direct<span className="text-[var(--red)]">.</span>
-          </h2>
-        </div>
-        <p className="shop__note reveal">Free delivery over €40 · Ships in 48 h</p>
+      <header className="shop__head reveal">
+        <h2 className="shop__title t-serif">
+          Order direct<i className="sq-dot" aria-hidden />
+          <span className="sr-only">.</span>
+        </h2>
+        <p className="shop__note">Free delivery over €40</p>
       </header>
       <div className="shop__grid">
         {EDITIONS.map((e, k) => (

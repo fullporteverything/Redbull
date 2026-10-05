@@ -71,7 +71,7 @@ export default function Inside() {
   const state = (k: number) => (k === i ? "is-active" : k < i ? "is-past" : "");
 
   return (
-    <section ref={root} id="inside" className={`inside relative ${inView ? "is-in" : ""}`} style={{ height: "440vh" }}>
+    <section ref={root} id="inside" className={`inside relative ${inView ? "is-in" : ""}`} style={{ height: "340vh" }}>
       <div className="inside__pin sticky top-0 h-[100svh] overflow-hidden">
         <header className="inside__head">
           <p className="eyebrow eyebrow--num text-white/70">

@@ -199,8 +199,8 @@ export default function Hero({ ready }: { ready: boolean }) {
       { x: 0, y: 0, scale: 1 },
       {
         x: () => (W < 761 ? 0 : W * 0.11),
-        y: () => (W < 761 ? -H * 0.06 : -H * 0.045),
-        scale: () => (W < 761 ? 0.82 : 1.09),
+        y: () => (W < 761 ? -H * 0.06 : -H * 0.025),
+        scale: () => (W < 761 ? 0.82 : 1.05),
         ease: "power2.inOut",
         duration: P.glideEnd - P.glideStart,
       },
@@ -306,7 +306,7 @@ export default function Hero({ ready }: { ready: boolean }) {
   }, [ready]);
 
   return (
-    <section ref={root} id="top" className={`hero relative ${ready ? "is-in" : ""}`} style={{ height: "430vh" }}>
+    <section ref={root} id="top" className={`hero relative ${ready ? "is-in" : ""}`} style={{ height: "360vh" }}>
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {/* ---------- light scene ---------- */}
         <div className="scene-light absolute inset-0 bg-[var(--paper)]" style={{ opacity: "var(--light-o, 1)" }}>
@@ -344,13 +344,17 @@ export default function Hero({ ready }: { ready: boolean }) {
             <filter id="rimHalo" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur stdDeviation="4.5" />
             </filter>
+            <filter id="rimChar" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="1.2" />
+            </filter>
             <filter id="rimBand" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur stdDeviation="2.2" />
             </filter>
           </defs>
           <path fill="none" stroke="#dcc58e" strokeWidth="16" opacity=".42" filter="url(#rimHalo)" />
           <path fill="none" stroke="#c49434" strokeWidth="6" opacity=".8" filter="url(#rimBand)" />
-          <path fill="none" stroke="#f2d27a" strokeWidth="2.6" />
+          <path fill="none" stroke="#4b2d12" strokeWidth="6.5" opacity=".38" filter="url(#rimChar)" />
+          <path fill="none" stroke="#f2d27a" strokeWidth="2.4" />
         </svg>
 
         {/* ---------- dark (blueprint) scene, clipped to the holes ---------- */}
@@ -402,7 +406,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
       </div>
       {/* anchor so nav links can jump to the formula state */}
-      <span id="formula" className="absolute left-0" style={{ top: "300vh" }} />
+      <span id="formula" className="absolute left-0" style={{ top: "250vh" }} />
     </section>
   );
 }

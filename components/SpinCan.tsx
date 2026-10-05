@@ -20,7 +20,7 @@ type Props = {
  * and lighting is a fixed overlay so the metal reads as turning under a light.
  * Without `wrap`, it falls back to a ±~35° turn of the photo itself.
  */
-const SpinCan = forwardRef<SpinCanHandle, Props>(function SpinCan({ src, wrap, alt, band = [0.055, 0.965], className, style }, ref) {
+const SpinCan = forwardRef<SpinCanHandle, Props>(function SpinCan({ src, wrap, alt, band = [0.055, 0.975], className, style }, ref) {
   const box = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const photo = useRef<HTMLImageElement | null>(null);
@@ -53,14 +53,19 @@ const SpinCan = forwardRef<SpinCanHandle, Props>(function SpinCan({ src, wrap, a
         sH = (b1 - b0) * th;
       const dy = Math.floor(b0 * h),
         dH = Math.ceil((b1 - b0) * h);
+      const taps = [0.17, 0.5, 0.83];
       for (let dx = 0; dx < w; dx++) {
-        const xn = ((dx + 0.5) / w) * 2 - 1;
-        const a = Math.asin(Math.max(-1, Math.min(1, xn))) + phi;
-        let u = ((a + Math.PI) / (2 * Math.PI)) % 1;
-        if (u < 0) u += 1;
-        const sx = Math.min(tw - 2, u * tw);
-        ctx.drawImage(t, sx, sy, 1.5, sH, dx, dy, 1, dH);
+        for (let k = 0; k < 3; k++) {
+          const xn = ((dx + taps[k]) / w) * 2 - 1;
+          const a = Math.asin(Math.max(-1, Math.min(1, xn))) + phi;
+          let u = ((a + Math.PI) / (2 * Math.PI)) % 1;
+          if (u < 0) u += 1;
+          const sx = Math.min(tw - 2, u * tw);
+          ctx.globalAlpha = k === 0 ? 1 : k === 1 ? 0.5 : 1 / 3;
+          ctx.drawImage(t, sx, sy, 1.5, sH, dx, dy, 1, dH);
+        }
       }
+      ctx.globalAlpha = 1;
       // keep the photographed silhouette
       ctx.globalCompositeOperation = "destination-in";
       ctx.drawImage(im!, 0, 0, w, h);

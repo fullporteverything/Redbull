@@ -4,19 +4,43 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scrollToTarget, useLenis } from "./SmoothScroll";
 
+/* section index → active link (none during Formula and Press, World for Reach + Shop) */
 const LINKS = [
-  { href: "#editions", label: "Editions", index: 2 },
-  { href: "#inside", label: "Inside", index: 3 },
-  { href: "#story", label: "Story", index: 4 },
-  { href: "#press", label: "World", index: 5 },
+  { href: "#editions", label: "Editions", match: [2] },
+  { href: "#inside", label: "Inside", match: [3] },
+  { href: "#story", label: "Story", match: [4] },
+  { href: "#reach", label: "World", match: [6, 7] },
 ];
 
-const SECTIONS = ["#formula-zone", "#editions", "#inside", "#story", "#press", "#reach", "#shop"];
+const SECTIONS: { sel: string; index: number; dark?: boolean }[] = [
+  { sel: "#formula-zone", index: 1, dark: true },
+  { sel: "#editions", index: 2 },
+  { sel: "#inside", index: 3, dark: true },
+  { sel: "#story", index: 4 },
+  { sel: "#press", index: 5, dark: true },
+  { sel: "#reach", index: 6 },
+  { sel: "#shop", index: 7 },
+];
+const TOTAL = 6;
+
+/* original mark: wordmark + a small sun on a horizon (not the trademark logo) */
+function Mark() {
+  return (
+    <svg className="site-nav__mark" viewBox="0 0 40 18" aria-hidden>
+      <text x="20" y="9.6" textAnchor="middle" className="site-nav__markText">
+        Red Bull
+      </text>
+      <path d="M8 15.2h9.2M22.8 15.2H32" stroke="#d0103a" strokeWidth="1.3" />
+      <circle cx="20" cy="15.2" r="2.6" fill="#f5c400" />
+    </svg>
+  );
+}
 
 export default function Header() {
   const lenis = useLenis();
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(1);
+  const [dark, setDark] = useState(false);
   const bar = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -26,26 +50,36 @@ export default function Header() {
       trigger: hero,
       start: "top top",
       end: "bottom bottom",
-      onUpdate: (s) => setVisible(s.progress > 0.72 || s.progress === 1),
+      onUpdate: (s) => setVisible(s.progress > 0.72),
       onLeave: () => setVisible(true),
+      onEnterBack: (s) => setVisible(s.progress > 0.72),
     });
     const page = ScrollTrigger.create({
       start: 0,
       end: "max",
       onUpdate: (s) => bar.current?.style.setProperty("transform", `scaleX(${s.progress.toFixed(4)})`),
     });
-    const triggers = SECTIONS.map((sel, i) =>
+    const idx = SECTIONS.map((s) =>
       ScrollTrigger.create({
-        trigger: sel,
+        trigger: s.sel,
         start: "top 50%",
         end: "bottom 50%",
-        onToggle: (s) => s.isActive && setIndex(i + 1),
+        onToggle: (t) => t.isActive && setIndex(s.index),
+      }),
+    );
+    const under = SECTIONS.map((s) =>
+      ScrollTrigger.create({
+        trigger: s.sel,
+        start: "top 48px",
+        end: "bottom 48px",
+        onToggle: (t) => t.isActive && setDark(!!s.dark),
       }),
     );
     return () => {
       show.kill();
       page.kill();
-      triggers.forEach((t) => t.kill());
+      idx.forEach((t) => t.kill());
+      under.forEach((t) => t.kill());
     };
   }, []);
 
@@ -53,33 +87,46 @@ export default function Header() {
     e.preventDefault();
     scrollToTarget(lenis, href);
   };
+  const shown = Math.min(index, TOTAL);
 
   return (
-    <header className={`site-nav ${visible ? "is-visible" : ""}`}>
+    <header className={`site-nav ${visible ? "is-visible" : ""}`} data-under={dark ? "dark" : "light"}>
       <a href="#top" className="site-nav__brand" onClick={(e) => go(e, "#top")} aria-label="Back to top">
-        <span className="site-nav__word">
-          <span>Red</span>
-          <span>Bull</span>
-        </span>
+        <Mark />
         <span className="site-nav__count tabular-nums">
-          <b>{String(index).padStart(2, "0")}</b> / 08
+          <b>{String(shown).padStart(2, "0")}</b>
+          <i>/</i>
+          {String(TOTAL).padStart(2, "0")}
         </span>
       </a>
       <nav className="site-nav__links" aria-label="Sections">
-        {LINKS.map((l) => (
-          <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className={index === l.index ? "is-active" : ""}>
-            {l.label}
-          </a>
-        ))}
+        {LINKS.map((l) => {
+          const active = l.match.includes(index);
+          return (
+            <a
+              key={l.href}
+              href={l.href}
+              data-label={l.label}
+              onClick={(e) => go(e, l.href)}
+              className={active ? "is-active" : ""}
+              aria-current={active || undefined}
+            >
+              {l.label}
+            </a>
+          );
+        })}
       </nav>
       <div className="site-nav__right">
         <a href="#shop" onClick={(e) => go(e, "#shop")} className="site-nav__shop">
-          Shop <span aria-hidden>→</span>
+          Shop
+          <svg viewBox="0 0 10 7" width="10" height="7" aria-hidden>
+            <path d="M0 3.5h8.6M6 .8l2.8 2.7L6 6.2" fill="none" stroke="currentColor" strokeWidth="1" />
+          </svg>
         </a>
         <a href="#shop" onClick={(e) => go(e, "#shop")} className="site-nav__bag" aria-label="Shop">
-          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden>
-            <path d="M6 8h12l-1 12H7L6 8Z" fill="none" stroke="currentColor" strokeWidth="1.3" />
-            <path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" strokeWidth="1.3" />
+          <svg viewBox="0 0 16 18" width="14" height="16" aria-hidden>
+            <path d="M2 5.5h12l-.9 11H2.9L2 5.5Z" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+            <path d="M5.2 5.5V4.2a2.8 2.8 0 0 1 5.6 0v1.3" fill="none" stroke="currentColor" strokeWidth="1.2" />
           </svg>
         </a>
       </div>

@@ -132,7 +132,7 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       ))}
 
       <span
-        className="absolute bottom-[34px] left-[5.5vw] tabular-nums"
+        className="absolute bottom-[34px] left-[var(--gx)] tabular-nums"
         style={{ font: "500 9.5px/1 var(--font-sans)", letterSpacing: ".2em", color: "#9a9ca3" }}
       >
         {String(count).padStart(3, "0")}

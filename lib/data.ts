@@ -145,39 +145,47 @@ export const INGREDIENTS: Ingredient[] = [
   },
 ];
 
-export type Chapter = { year: string; title: string; body: string; img: string; caption: string; alt: string };
+export type Chapter = { year: string; title: string; body: string; img: string; place: string; alt: string };
 
 export const CHAPTERS: Chapter[] = [
   {
     year: "1987",
-    title: "Born by a lake",
+    title: "Born by a lake.",
     body: "The first cans leave a small office near Fuschl am See. Nobody has a shelf for them yet, so they make one.",
     img: "/img/story/lake.webp",
-    caption: "Salzkammergut",
+    place: "Salzkammergut",
     alt: "Calm alpine lake at dusk with mountains reflected in the water",
   },
   {
     year: "1997",
-    title: "Crossing the Atlantic",
+    title: "Crossing the Atlantic.",
     body: "After a decade spreading through Europe, the slim can lands in California. It arrives quietly and does not stay quiet for long.",
     img: "/img/story/coast.webp",
-    caption: "Pacific Coast Highway",
+    place: "Pacific Coast",
     alt: "Golden-hour sunset over a beach on the Pacific Coast Highway",
   },
   {
+    year: "2004",
+    title: "Back to the mountains.",
+    body: "Ten years of travel bring the can home to the Alps, stocked in huts and lift stations from Austria to Switzerland.",
+    img: "/img/story/lake-alt.webp",
+    place: "Upper Austria",
+    alt: "Sun breaking through clouds over an alpine lake below steep peaks",
+  },
+  {
     year: "2012",
-    title: "Thirty-nine kilometres up",
+    title: "Thirty-nine kilometres up.",
     body: "A capsule, a balloon and one step off the edge of the stratosphere, watched live by millions holding their breath.",
     img: "/img/story/space.webp",
-    caption: "Stratosphere",
+    place: "Stratosphere",
     alt: "The curved horizon of Earth with a thin blue band of atmosphere against black space",
   },
   {
     year: "Today",
-    title: "Still the same can",
+    title: "Still the same can.",
     body: "Sold in 177 countries, and the 250 ml original is still the one most people reach for first.",
     img: "/img/story/today.webp",
-    caption: "177 countries",
+    place: "Everywhere",
     alt: "Long-exposure night highway with streaks of red and white light",
   },
 ];
@@ -196,14 +204,15 @@ export const PACKS = [
   { size: 24, price: 46.99 },
 ];
 
-export const CREDITS = [
+export const CREDITS: { use: string; title: string; creator: string; license: string; licenseUrl: string; url: string; note?: string }[] = [
   { use: "Classic can", title: "Redbull Dose", creator: "DYVER", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", url: "https://commons.wikimedia.org/wiki/File:Redbull_Dose.jpg" },
   { use: "Sugarfree can", title: "CreativeTools.se – PackshotCreator – RedBull", creator: "Creative Tools", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/creative_tools/4311162620/" },
   { use: "Red Edition can", title: "Cranberry Red Bull", creator: "seamus_walsh", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/95158910@N00/6966321726" },
-  { use: "Blue Edition can", title: "Red Bull Blue", creator: "koka_sexton", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/9080929@N05/12649565655" },
+  { use: "Blue Edition can", title: "Red Bull Blue", creator: "koka_sexton", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/9080929@N05/12649565655", note: " (upscaled with Swin2SR, background removed)" },
   { use: "Yellow Edition can", title: "Red Bull Yellow Edition", creator: "Kidfly182", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", url: "https://commons.wikimedia.org/wiki/File:Red_Bull_Yellow_Edition.jpg" },
   { use: "1987", title: "sunset on wolfgangsee 2", creator: "magilla 03", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", url: "https://www.flickr.com/photos/71030653@N02/15302677799" },
   { use: "1997", title: "Pacific Coast Highway 33 – Thornhill Broome Beach", creator: "hannes-flo", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/154788154@N04/52480925542" },
+  { use: "2004", title: "supernova vi", creator: "hannes-flo", license: "CC BY 2.0", licenseUrl: "https://creativecommons.org/licenses/by/2.0/", url: "https://www.flickr.com/photos/154788154@N04/52597937064" },
   { use: "2012", title: "Earth's thin blue atmosphere above the Pacific", creator: "NASA / ISS crew", license: "Public domain", licenseUrl: "https://www.nasa.gov/nasa-brand-center/images-and-media/", url: "https://images.nasa.gov/details/iss074e0089803" },
   { use: "Today", title: "Night Drive", creator: "Kurayba", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", url: "https://www.flickr.com/photos/48503330@N08/13884197302" },
 ];

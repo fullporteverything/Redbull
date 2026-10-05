@@ -15,7 +15,7 @@ export default function Footer() {
               <a href={c.licenseUrl} target="_blank" rel="noreferrer">
                 {c.license}
               </a>
-              {c.use.includes("can") ? " (background removed)" : " (cropped)"}
+              {c.note ?? (c.use.includes("can") ? " (background removed)" : " (cropped)")}
             </li>
           ))}
         </ul>

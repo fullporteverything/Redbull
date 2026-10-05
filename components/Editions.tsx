@@ -63,7 +63,7 @@ export default function Editions() {
   const e = EDITIONS[i];
 
   return (
-    <section ref={root} id="editions" className="editions relative" style={{ height: "420vh" }}>
+    <section ref={root} id="editions" className="editions relative" style={{ height: "340vh" }}>
       <div className="editions__pin sticky top-0 h-[100svh] overflow-hidden">
         <p className="ed-eyebrow">
           <b>02</b>

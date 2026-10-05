@@ -17,10 +17,10 @@ const smooth = (a: number, b: number, v: number) => {
 const P = {
   irisStart: 0.2,
   irisEnd: 0.42,
-  splitStart: 0.42,
-  splitEnd: 0.6,
-  glideStart: 0.48,
-  glideEnd: 0.74,
+  splitStart: 0.31,
+  splitEnd: 0.56,
+  glideStart: 0.44,
+  glideEnd: 0.72,
   copyIn: 0.7,
   navIn: 0.72,
 };
@@ -70,6 +70,8 @@ export default function Hero({ ready }: { ready: boolean }) {
     const darkEl = dark.current!;
     const rimEl = rim.current!;
     const rimPaths = Array.from(rimEl.querySelectorAll("path"));
+    const smokeEl = rimEl.querySelector(".rim-smoke") as SVGPathElement;
+    const goldEl = rimEl.querySelector(".rim-gold") as SVGGElement;
     const charEl = char.current!;
     const scorchEl = scorch.current!;
     const sctx = scorchEl.getContext("2d")!;
@@ -163,8 +165,9 @@ export default function Hero({ ready }: { ready: boolean }) {
     // the small "bean" that is already open when the hero appears, then heals
     if (!reduced) {
       const now = performance.now() + 250;
-      field.spawn({ x: W * 0.665, y: H * 0.26, R: 40 * k(), born: now, grow: 260, hold: 900, heal: 1000 });
-      field.spawn({ x: W * 0.69, y: H * 0.255, R: 34 * k(), born: now, grow: 260, hold: 800, heal: 1000 });
+      field.spawn({ x: W * 0.652, y: H * 0.266, R: 34 * k(), born: now, grow: 260, hold: 900, heal: 1000 });
+      field.spawn({ x: W * 0.676, y: H * 0.26, R: 38 * k(), born: now, grow: 260, hold: 950, heal: 1000 });
+      field.spawn({ x: W * 0.7, y: H * 0.254, R: 32 * k(), born: now, grow: 260, hold: 850, heal: 1000 });
     }
 
     /* ---- scroll ---- */
@@ -285,12 +288,16 @@ export default function Hero({ ready }: { ready: boolean }) {
           rimPaths.forEach((el) => el.setAttribute("d", d));
           charEl.setAttribute("d", d);
         }
-        rimEl.style.opacity = String(1 - smooth(P.irisStart, P.irisStart + 0.12, p));
+        const irisOn = smooth(P.irisStart, P.irisStart + 0.05, p) * (1 - smooth(P.irisEnd - 0.03, P.irisEnd, p));
+        rimEl.style.opacity = "1";
+        goldEl.style.opacity = String(1 - smooth(P.irisStart, P.irisStart + 0.06, p));
+        smokeEl.style.opacity = String(irisOn);
       }
 
       // formula copy + bottom UI
       copy.current?.classList.toggle("is-in", p > P.copyIn);
       section.style.setProperty("--ui-o", String(1 - smooth(0.02, 0.1, p)));
+      section.style.setProperty("--ink-k", smooth(0.03, 0.14, p).toFixed(3));
       section.style.setProperty("--light-o", String(1 - smooth(P.irisEnd - 0.04, P.irisEnd, p)));
     };
     gsap.ticker.add(tick);
@@ -344,6 +351,9 @@ export default function Hero({ ready }: { ready: boolean }) {
             <filter id="rimHalo" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur stdDeviation="4.5" />
             </filter>
+            <filter id="rimSmoke" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
             <filter id="rimChar" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur stdDeviation="1.2" />
             </filter>
@@ -351,10 +361,13 @@ export default function Hero({ ready }: { ready: boolean }) {
               <feGaussianBlur stdDeviation="2.2" />
             </filter>
           </defs>
+          <path className="rim-smoke" fill="none" stroke="rgba(205,212,230,.55)" strokeWidth="110" filter="url(#rimSmoke)" style={{ opacity: 0 }} />
+          <g className="rim-gold">
           <path fill="none" stroke="#dcc58e" strokeWidth="16" opacity=".42" filter="url(#rimHalo)" />
           <path fill="none" stroke="#c49434" strokeWidth="6" opacity=".8" filter="url(#rimBand)" />
           <path fill="none" stroke="#4b2d12" strokeWidth="6.5" opacity=".38" filter="url(#rimChar)" />
           <path fill="none" stroke="#f2d27a" strokeWidth="2.4" />
+          </g>
         </svg>
 
         {/* ---------- dark (blueprint) scene, clipped to the holes ---------- */}

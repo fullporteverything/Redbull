@@ -196,13 +196,19 @@ export default function Hero({ ready }: { ready: boolean }) {
     tl.fromTo(
       darkCan.current,
       { x: 0, y: 0, scale: 1 },
-      { x: () => W * 0.11, y: () => -H * 0.045, scale: 1.09, ease: "power2.inOut", duration: P.glideEnd - P.glideStart },
+      {
+        x: () => (W < 761 ? 0 : W * 0.11),
+        y: () => (W < 761 ? -H * 0.06 : -H * 0.045),
+        scale: () => (W < 761 ? 0.82 : 1.09),
+        ease: "power2.inOut",
+        duration: P.glideEnd - P.glideStart,
+      },
       P.glideStart,
     );
     tl.fromTo(
       spot.current,
       { x: 0, y: 0 },
-      { x: () => W * 0.11, y: () => -H * 0.045, ease: "power2.inOut", duration: P.glideEnd - P.glideStart },
+      { x: () => (W < 761 ? 0 : W * 0.11), y: () => -H * 0.05, ease: "power2.inOut", duration: P.glideEnd - P.glideStart },
       P.glideStart,
     );
 
@@ -239,7 +245,7 @@ export default function Hero({ ready }: { ready: boolean }) {
 
       // iris (scroll takeover) centred on the can
       const ir = easeInOut(smooth(P.irisStart, P.irisEnd, p));
-      field.iris = { x: W * 0.51, y: H * 0.5, r: ir * Math.hypot(W, H) * 0.78 };
+      field.iris = { x: W * 0.51, y: H * (W < 761 ? 0.38 : 0.5), r: ir * Math.hypot(W, H) * 0.82 };
 
       // scorch stamps from healed holes
       for (const b of field.prune(now)) {

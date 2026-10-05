@@ -250,7 +250,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       // scorch stamps from healed holes
       for (const b of field.prune(now)) {
         const g = sctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.R * 0.7);
-        g.addColorStop(0, "rgba(190,150,70,0.20)");
+        g.addColorStop(0, "rgba(190,150,70,0.11)");
         g.addColorStop(1, "rgba(190,150,70,0)");
         sctx.fillStyle = g;
         sctx.fillRect(b.x - b.R, b.y - b.R, b.R * 2, b.R * 2);

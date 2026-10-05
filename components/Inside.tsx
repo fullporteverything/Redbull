@@ -51,8 +51,8 @@ export default function Inside() {
       onUpdate: (s) => {
         const n = INGREDIENTS.length;
         setI(Math.min(n - 1, Math.floor(s.progress * n)));
-        // scroll-scrubbed turn: the front swings left→right and back, one swing per ingredient
-        can.current?.setAngle(Math.sin(s.progress * Math.PI * n) * 0.55);
+        // scroll-scrubbed full rotation: ~1.5 turns across the four ingredients, front travelling left→right
+        can.current?.setAngle(-s.progress * Math.PI * 3);
       },
     });
     const reveal = ScrollTrigger.create({ trigger: el, start: "top 75%", onEnter: () => setInView(true) });
@@ -116,7 +116,13 @@ export default function Inside() {
 
         <div className="in-stage">
           <span className="in-halo" />
-          <SpinCan ref={can} src="/img/cans/sugarfree.webp" alt="A silver and light-blue can" className="in-can" />
+          <SpinCan
+            ref={can}
+            src="/img/cans/sugarfree.webp"
+            wrap="/img/cans/sugarfree-wrap.webp"
+            alt="A silver and light-blue can, turning as you scroll"
+            className="in-can"
+          />
           <span className="in-can__shadow" />
         </div>
 

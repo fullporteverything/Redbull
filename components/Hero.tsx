@@ -107,18 +107,19 @@ export default function Hero({ ready }: { ready: boolean }) {
 
     const spawnAt = (x: number, y: number, speed: number, now: number) => {
       const s = k();
-      const R = (46 + Math.min(speed, 70) * 1.5) * s;
+      // cursor-sized: ~60–150px across, a short tail that closes behind the pointer
+      const R = Math.min(30 + speed * 0.9, 74) * s;
       const a = Math.random() * Math.PI * 2;
       field.spawn({
-        x: x + Math.cos(a) * 8,
-        y: y + Math.sin(a) * 8,
+        x: x + Math.cos(a) * 4,
+        y: y + Math.sin(a) * 4,
         R,
         born: now,
-        grow: 360,
-        hold: 650 + Math.random() * 400,
-        heal: 2400 + Math.random() * 900,
-        vx: (brush.tx - brush.x) * 0.25,
-        vy: (brush.ty - brush.y) * 0.25,
+        grow: 200,
+        hold: 160 + Math.random() * 160,
+        heal: 850 + Math.random() * 350,
+        vx: 0,
+        vy: 0,
       });
     };
 
@@ -162,8 +163,8 @@ export default function Hero({ ready }: { ready: boolean }) {
     // the small "bean" that is already open when the hero appears, then heals
     if (!reduced) {
       const now = performance.now() + 250;
-      field.spawn({ x: W * 0.665, y: H * 0.26, R: 58 * k(), born: now, grow: 260, hold: 1100, heal: 1300 });
-      field.spawn({ x: W * 0.695, y: H * 0.255, R: 50 * k(), born: now, grow: 260, hold: 1000, heal: 1300 });
+      field.spawn({ x: W * 0.665, y: H * 0.26, R: 40 * k(), born: now, grow: 260, hold: 900, heal: 1000 });
+      field.spawn({ x: W * 0.69, y: H * 0.255, R: 34 * k(), born: now, grow: 260, hold: 800, heal: 1000 });
     }
 
     /* ---- scroll ---- */
@@ -236,7 +237,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         const step = Math.hypot(brush.x - px, brush.y - py);
         if (brush.live && step > 0.3) {
           brush.travel += step;
-          if (brush.travel > 20 * k()) {
+          if (brush.travel > 26 * k()) {
             brush.travel = 0;
             spawnAt(brush.x, brush.y, step, now);
           }
@@ -249,15 +250,15 @@ export default function Hero({ ready }: { ready: boolean }) {
 
       // scorch stamps from healed holes
       for (const b of field.prune(now)) {
-        const g = sctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.R * 0.7);
-        g.addColorStop(0, "rgba(190,150,70,0.11)");
+        const g = sctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.R * 0.45);
+        g.addColorStop(0, "rgba(190,150,70,0.035)");
         g.addColorStop(1, "rgba(190,150,70,0)");
         sctx.fillStyle = g;
         sctx.fillRect(b.x - b.R, b.y - b.R, b.R * 2, b.R * 2);
       }
       sctx.save();
       sctx.globalCompositeOperation = "destination-out";
-      sctx.fillStyle = "rgba(0,0,0,0.006)";
+      sctx.fillStyle = "rgba(0,0,0,0.02)";
       sctx.fillRect(0, 0, W, H);
       sctx.restore();
 
@@ -341,14 +342,14 @@ export default function Hero({ ready }: { ready: boolean }) {
         <svg ref={rim} className="pointer-events-none absolute inset-0 z-[1] h-full w-full" aria-hidden>
           <defs>
             <filter id="rimHalo" x="-10%" y="-10%" width="120%" height="120%">
-              <feGaussianBlur stdDeviation="7" />
+              <feGaussianBlur stdDeviation="4.5" />
             </filter>
             <filter id="rimBand" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur stdDeviation="2.2" />
             </filter>
           </defs>
-          <path fill="none" stroke="#dcc58e" strokeWidth="28" opacity=".5" filter="url(#rimHalo)" />
-          <path fill="none" stroke="#c49434" strokeWidth="9" opacity=".8" filter="url(#rimBand)" />
+          <path fill="none" stroke="#dcc58e" strokeWidth="16" opacity=".42" filter="url(#rimHalo)" />
+          <path fill="none" stroke="#c49434" strokeWidth="6" opacity=".8" filter="url(#rimBand)" />
           <path fill="none" stroke="#f2d27a" strokeWidth="2.6" />
         </svg>
 
@@ -396,7 +397,7 @@ export default function Hero({ ready }: { ready: boolean }) {
                 <feGaussianBlur stdDeviation="6" />
               </filter>
             </defs>
-            <path ref={char} fill="none" stroke="rgba(70,66,84,.7)" strokeWidth="22" filter="url(#charBlur)" />
+            <path ref={char} fill="none" stroke="rgba(70,66,84,.65)" strokeWidth="14" filter="url(#charBlur)" />
           </svg>
         </div>
       </div>

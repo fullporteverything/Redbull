@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red Bull — Gives you wings. (Concept)</title>
+  <meta name="description" content="An independent concept site for an energy drink: the formula, four editions, what's inside, the story and a small shop.">
+  <meta name="theme-color" content="#ecebe7">
+  <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__mark">
+      <span class="loader__word">Red Bull</span>
+      <span class="loader__sun"></span>
+      <span class="loader__sub">Energy Drink</span>
+    </div>
+
+    <span class="pill pill--dark"  style="--x:12%;--y:17%;--d:.15s">80 mg caffeine</span>
+    <span class="pill pill--light" style="--x:46%;--y:9%;--d:.55s">Gives you wings</span>
+    <span class="pill pill--light" style="--x:80%;--y:15%;--d:.35s">Fuschl am See, Austria</span>
+    <span class="pill pill--light" style="--x:6%;--y:46%;--d:.75s">Since 1987</span>
+    <span class="pill pill--dark"  style="--x:84%;--y:48%;--d:.25s">Taurine 1,000 mg</span>
+    <span class="pill pill--light" style="--x:18%;--y:76%;--d:.95s">250 ml</span>
+    <span class="pill pill--dark"  style="--x:78%;--y:80%;--d:.65s">Alpine water</span>
+
+    <span class="loader__count" id="loaderCount">000</span>
+    <span class="loader__hint">Loading the can</span>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Back to top">
+      <span class="nav__word">Red Bull</span>
+      <span class="nav__count"><b id="navIndex">01</b>&thinsp;/&thinsp;08</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#editions">Editions</a>
+      <a href="#inside">Inside</a>
+      <a href="#story">Story</a>
+      <a href="#press">Press</a>
+    </nav>
+    <div class="nav__right">
+      <a class="nav__shop" href="#shop">Shop</a>
+      <button class="nav__cart" id="cartBtn" type="button" aria-label="Open order">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span class="nav__badge" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 01 HERO ============ -->
+    <section class="hero" id="top" data-theme="light" data-index="1">
+      <div class="hero__sticky">
+        <svg class="burn" id="burn" aria-hidden="true">
+          <defs>
+            <radialGradient id="burnFill" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3a4a98"/>
+              <stop offset=".32" stop-color="#1b2868"/>
+              <stop offset=".62" stop-color="#0d1748"/>
+              <stop offset="1" stop-color="#070d30"/>
+            </radialGradient>
+            <filter id="burnDisplace" filterUnits="userSpaceOnUse" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="3" seed="11" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="110" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="burnBlur" filterUnits="userSpaceOnUse" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="9"/>
+            </filter>
+          </defs>
+          <g filter="url(#burnDisplace)">
+            <g id="burnGlow" filter="url(#burnBlur)" fill="#ff8a1c" opacity=".9"></g>
+            <g id="burnEdge" fill="#ffd36b"></g>
+            <g id="burnCore" fill="url(#burnFill)"></g>
+          </g>
+          <rect id="burnCover" x="0" y="0" width="100%" height="100%" fill="url(#burnFill)" opacity="0"/>
+        </svg>
+
+        <div class="hero__can">
+          <div class="hero__float"><div data-can="classic" id="heroCan"></div></div>
+        </div>
+
+        <h1 class="hero__title" id="heroTitle" aria-label="Red Bull.">
+          <span class="hero__line"><span class="hero__word">Red</span></span>
+          <span class="hero__line"><span class="hero__word">Bull<i class="dot">.</i></span></span>
+        </h1>
+
+        <p class="hero__tag">Gives you<br>wings.</p>
+        <div class="hero__scroll"><span>Scroll</span><i class="mouse"><i></i></i></div>
+        <p class="hero__meta">Caffeine · Taurine · B-vitamins<br>Fuschl am See, Austria</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 FORMULA ============ -->
+    <section class="formula" id="formula" data-theme="dark" data-index="2">
+      <canvas class="topo" id="topo" aria-hidden="true"></canvas>
+      <div class="formula__inner">
+        <div class="formula__copy reveal">
+          <p class="eyebrow">01 — The formula</p>
+          <h2 class="serif-xl">Vitalizes body<br>and mind<i class="dot">.</i></h2>
+          <p class="body">Caffeine and taurine, a measure of B-group vitamins, sugars and water drawn from the Alps. Made in Austria since 1987 for long drives, late shifts and early starts.</p>
+          <dl class="formula__stats">
+            <div><dt>80<small>mg</small></dt><dd>Caffeine</dd></div>
+            <div><dt>1,000<small>mg</small></dt><dd>Taurine</dd></div>
+            <div><dt>250<small>ml</small></dt><dd>Per can</dd></div>
+          </dl>
+        </div>
+        <div class="formula__stage">
+          <div class="formula__float" id="formulaCan"><div data-can="classic"></div></div>
+        </div>
+        <ul class="formula__aside reveal">
+          <li><span>Origin</span>Austria</li>
+          <li><span>Water</span>Alpine</li>
+          <li><span>Since</span>1987</li>
+          <li><span>Format</span>250 ml slim can</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 03 EDITIONS ============ -->
+    <section class="editions" id="editions" data-theme="light" data-index="3">
+      <div class="editions__sticky">
+        <header class="editions__head">
+          <p class="eyebrow">02 — Four editions</p>
+          <h2 class="serif-xl">Four editions<i class="dot">.</i></h2>
+        </header>
+
+        <div class="editions__grid">
+          <div class="ed-copy stack">
+            <article class="ed-panel is-active" data-i="0" style="--dot:var(--red)">
+              <p class="code">Red Bull.01</p>
+              <h3 class="ed-panel__name">Energy Drink<i class="dot">.</i></h3>
+              <p class="ed-panel__flavor">The original formula</p>
+              <p class="ed-panel__desc">The one that started it. Sweet, faintly tart and unchanged since the first slim silver-and-blue can left Austria.</p>
+              <dl class="nutri">
+                <div><dt>80<small>mg</small></dt><dd>Caffeine</dd></div>
+                <div><dt>1,000<small>mg</small></dt><dd>Taurine</dd></div>
+                <div><dt>27<small>g</small></dt><dd>Sugars</dd></div>
+                <div><dt>250<small>ml</small></dt><dd>Volume</dd></div>
+              </dl>
+            </article>
+            <article class="ed-panel" data-i="1" style="--dot:var(--wm)">
+              <p class="code">Red Bull.02</p>
+              <h3 class="ed-panel__name">Red Edition<i class="dot">.</i></h3>
+              <p class="ed-panel__flavor">Watermelon</p>
+              <p class="ed-panel__desc">Bright, juicy and a little sharp at the finish. The same formula wearing its summer colour, for long afternoons that run late.</p>
+              <dl class="nutri">
+                <div><dt>80<small>mg</small></dt><dd>Caffeine</dd></div>
+                <div><dt>1,000<small>mg</small></dt><dd>Taurine</dd></div>
+                <div><dt>27<small>g</small></dt><dd>Sugars</dd></div>
+                <div><dt>250<small>ml</small></dt><dd>Volume</dd></div>
+              </dl>
+            </article>
+            <article class="ed-panel" data-i="2" style="--dot:var(--blue)">
+              <p class="code">Red Bull.03</p>
+              <h3 class="ed-panel__name">Blue Edition<i class="dot">.</i></h3>
+              <p class="ed-panel__flavor">Blueberry</p>
+              <p class="ed-panel__desc">Darker fruit with softer edges, quieter on the palate. For evenings that need a second wind rather than a first one.</p>
+              <dl class="nutri">
+                <div><dt>80<small>mg</small></dt><dd>Caffeine</dd></div>
+                <div><dt>1,000<small>mg</small></dt><dd>Taurine</dd></div>
+                <div><dt>27<small>g</small></dt><dd>Sugars</dd></div>
+                <div><dt>250<small>ml</small></dt><dd>Volume</dd></div>
+              </dl>
+            </article>
+            <article class="ed-panel" data-i="3" style="--dot:#d9a800">
+              <p class="code">Red Bull.04</p>
+              <h3 class="ed-panel__name">Yellow Edition<i class="dot">.</i></h3>
+              <p class="ed-panel__flavor">Tropical fruits</p>
+              <p class="ed-panel__desc">Passion fruit and pineapple, about as loud as the can it comes in. Best served very cold, somewhere with a view.</p>
+              <dl class="nutri">
+                <div><dt>80<small>mg</small></dt><dd>Caffeine</dd></div>
+                <div><dt>1,000<small>mg</small></dt><dd>Taurine</dd></div>
+                <div><dt>27<small>g</small></dt><dd>Sugars</dd></div>
+                <div><dt>250<small>ml</small></dt><dd>Volume</dd></div>
+              </dl>
+            </article>
+          </div>
+
+          <div class="ed-meta">
+            <div><span class="label">Edition</span><span class="ed-meta__val stack" id="edMetaEdition"><b class="is-active">Original</b><b>Red</b><b>Blue</b><b>Yellow</b></span></div>
+            <div><span class="label">Size</span><span class="ed-meta__val">250 ml</span></div>
+          </div>
+
+          <div class="ed-stage" id="edStage">
+            <span class="ed-glow" id="edGlow"></span>
+            <div class="ed-can is-active" data-i="0"><div data-can="classic"></div></div>
+            <div class="ed-can is-next" data-i="1"><div data-can="red"></div></div>
+            <div class="ed-can is-next" data-i="2"><div data-can="blue"></div></div>
+            <div class="ed-can is-next" data-i="3"><div data-can="yellow"></div></div>
+          </div>
+        </div>
+
+        <footer class="editions__foot">
+          <span class="label">Scroll to change edition</span>
+          <ol class="ticks" id="edTicks">
+            <li class="is-active">01</li><li>02</li><li>03</li><li>04</li>
+          </ol>
+        </footer>
+      </div>
+    </section>
+
+    <!-- ============ 04 INSIDE ============ -->
+    <section class="inside" id="inside" data-theme="dark" data-index="4">
+      <div class="inside__sticky">
+        <header class="inside__head">
+          <p class="eyebrow">03 — Functional ingredients</p>
+          <h2 class="serif-xl">Inside<i class="dot">.</i></h2>
+          <div class="tabs" id="insideTabs" role="tablist">
+            <button class="tab is-active" type="button" data-step="0">Caffeine</button>
+            <button class="tab" type="button" data-step="1">Taurine</button>
+            <button class="tab" type="button" data-step="2">B-Group</button>
+            <button class="tab" type="button" data-step="3">Alpine water</button>
+          </div>
+        </header>
+
+        <div class="inside__grid">
+          <div class="in-names stack">
+            <div class="in-name is-active" data-i="0"><h3 class="mega">Caff-<br>eine</h3><p class="in-name__sci">1,3,7-trimethylxanthine</p></div>
+            <div class="in-name" data-i="1"><h3 class="mega">Tau-<br>rine</h3><p class="in-name__sci">2-aminoethanesulfonic acid</p></div>
+            <div class="in-name" data-i="2"><h3 class="mega">B-<br>Group</h3><p class="in-name__sci">Niacin · B5 · B6 · B12</p></div>
+            <div class="in-name" data-i="3"><h3 class="mega">Alp-<br>ine</h3><p class="in-name__sci">H<sub>2</sub>O, from the Alps</p></div>
+          </div>
+
+          <div class="in-stage">
+            <svg class="in-ring" viewBox="0 0 400 400" aria-hidden="true">
+              <defs><path id="ringPath" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+              <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,.12)"/>
+              <text><textPath href="#ringPath">Caffeine · Taurine · B-Group vitamins · Alpine water · Caffeine · Taurine · B-Group vitamins · Alpine water ·</textPath></text>
+            </svg>
+            <div class="in-can" id="insideCan"><div data-can="classic"></div></div>
+          </div>
+
+          <div class="in-details stack">
+            <div class="in-detail is-active" data-i="0">
+              <p class="label">01 / 04</p>
+              <p class="in-detail__desc">Occurs naturally in coffee beans, tea leaves and cacao. One can holds roughly what a cup of home-brewed coffee does.</p>
+              <dl class="spec">
+                <div><dt>Source</dt><dd>Pharmaceutical grade</dd></div>
+                <div><dt>Role</dt><dd>Alertness, concentration</dd></div>
+                <div class="spec__dose"><dt>Dose</dt><dd>80<small>mg per can</small></dd></div>
+              </dl>
+            </div>
+            <div class="in-detail" data-i="1">
+              <p class="label">02 / 04</p>
+              <p class="in-detail__desc">An amino acid the body already makes on its own, also found in fish and meat. The version in the can is made synthetically.</p>
+              <dl class="spec">
+                <div><dt>Source</dt><dd>Synthesised</dd></div>
+                <div><dt>Role</dt><dd>Supports normal body functions</dd></div>
+                <div class="spec__dose"><dt>Dose</dt><dd>1,000<small>mg per can</small></dd></div>
+              </dl>
+            </div>
+            <div class="in-detail" data-i="2">
+              <p class="label">03 / 04</p>
+              <p class="in-detail__desc">Four water-soluble vitamins involved in turning food into usable energy: niacin, pantothenic acid, B6 and B12.</p>
+              <dl class="spec">
+                <div><dt>Source</dt><dd>Water-soluble vitamins</dd></div>
+                <div><dt>Role</dt><dd>Energy-yielding metabolism</dd></div>
+                <div class="spec__dose"><dt>Dose</dt><dd>4<small>vitamins</small></dd></div>
+              </dl>
+            </div>
+            <div class="in-detail" data-i="3">
+              <p class="label">04 / 04</p>
+              <p class="in-detail__desc">Spring water from the Austrian and Swiss Alps, drawn close to where every can is filled. The quiet majority of the recipe.</p>
+              <dl class="spec">
+                <div><dt>Source</dt><dd>Alpine springs</dd></div>
+                <div><dt>Role</dt><dd>The base of it all</dd></div>
+                <div class="spec__dose"><dt>Dose</dt><dd>250<small>ml</small></dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <p class="inside__foot label">Four functional ingredients · Alpine water · Nothing hidden</p>
+      </div>
+    </section>
+
+    <!-- ============ 05 STORY ============ -->
+    <section class="story" id="story" data-theme="light" data-index="5">
+      <div class="story__sticky">
+        <p class="eyebrow story__eyebrow">04 — The story</p>
+
+        <div class="story__grid">
+          <div class="story__copy stack">
+            <article class="chapter is-active" data-i="0">
+              <p class="label">Chapter 01 — 1987</p>
+              <h3 class="serif-l">Born by a lake<i class="dot">.</i></h3>
+              <p class="body">The first cans leave a small office in Fuschl am See, Austria. Nobody has a shelf for it yet, so it makes its own.</p>
+            </article>
+            <article class="chapter" data-i="1">
+              <p class="label">Chapter 02 — 1997</p>
+              <h3 class="serif-l">Crossing the Atlantic<i class="dot">.</i></h3>
+              <p class="body">After a decade spreading through Europe, the slim can lands in California. It arrives quietly and does not stay quiet for long.</p>
+            </article>
+            <article class="chapter" data-i="2">
+              <p class="label">Chapter 03 — 2012</p>
+              <h3 class="serif-l">Thirty-nine kilometres up<i class="dot">.</i></h3>
+              <p class="body">A capsule, a balloon and one step off the edge of the stratosphere, watched live by millions of people holding their breath.</p>
+            </article>
+            <article class="chapter" data-i="3">
+              <p class="label">Chapter 04 — Today</p>
+              <h3 class="serif-l">Still the same can<i class="dot">.</i></h3>
+              <p class="body">Sold in 177 countries, and the 250&nbsp;ml original is still the one most people reach for first.</p>
+            </article>
+          </div>
+
+          <div class="story__media" id="storyMedia">
+            <figure class="frame is-active" data-i="0">
+              <div class="frame__img">
+                <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="s1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c3cfd9"/><stop offset=".6" stop-color="#ece4d4"/><stop offset="1" stop-color="#f2d8b8"/></linearGradient>
+                    <linearGradient id="s1lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8697a5"/><stop offset="1" stop-color="#26394a"/></linearGradient>
+                  </defs>
+                  <rect width="400" height="520" fill="url(#s1sky)"/>
+                  <circle cx="290" cy="160" r="30" fill="#fff4dd" opacity=".85"/>
+                  <path d="M0 268 L56 196 L104 236 L168 140 L232 226 L282 184 L344 246 L400 204 V340 H0Z" fill="#a3b0bc"/>
+                  <path d="M168 140 L186 166 L172 162 L160 172Z" fill="#f4f1ea"/>
+                  <path d="M0 300 L48 258 L118 290 L190 228 L262 284 L330 252 L400 288 V344 H0Z" fill="#62778a"/>
+                  <path d="M0 326 Q100 306 200 322 T400 316 V344 H0Z" fill="#2c4637"/>
+                  <rect y="342" width="400" height="178" fill="url(#s1lake)"/>
+                  <g stroke="#fff" stroke-opacity=".22" stroke-width="1.2"><path d="M40 372h90M210 384h120M80 410h60M250 430h90M30 452h110M180 470h70"/></g>
+                  <path d="M268 352 l30 0 l-6 6 l-20 0Z" fill="#1d2633"/>
+                </svg>
+              </div>
+              <figcaption><span>Fuschl am See</span><span>1987</span></figcaption>
+            </figure>
+            <figure class="frame" data-i="1">
+              <div class="frame__img">
+                <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e0b4"/><stop offset=".55" stop-color="#eba95e"/><stop offset="1" stop-color="#c46f3c"/></linearGradient>
+                    <radialGradient id="s2sun" cx=".7" cy=".42" r=".5"><stop offset="0" stop-color="#fff6d6" stop-opacity="1"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="400" height="520" fill="url(#s2sky)"/>
+                  <rect width="400" height="520" fill="url(#s2sun)"/>
+                  <rect y="248" width="400" height="60" fill="#7e98a4"/>
+                  <path d="M0 250 Q120 242 400 252 V262 H0Z" fill="#a9bcc2" opacity=".7"/>
+                  <path d="M0 230 Q60 200 120 236 L170 270 L150 520 H0Z" fill="#5d3b26"/>
+                  <path d="M400 280 Q330 270 300 300 L260 520 H400Z" fill="#7a4a2c"/>
+                  <path d="M150 520 Q210 380 300 300 L318 300 Q240 390 210 520Z" fill="#d8b98e"/>
+                  <g transform="translate(184 368)">
+                    <rect x="0" y="0" width="74" height="40" rx="7" fill="#2e3a45"/>
+                    <rect x="6" y="6" width="26" height="14" rx="2" fill="#e8c592" opacity=".8"/>
+                    <rect x="38" y="6" width="28" height="14" rx="2" fill="#e8c592" opacity=".55"/>
+                    <rect x="-6" y="-8" width="86" height="8" rx="2" fill="#3c4a56"/>
+                    <circle cx="16" cy="42" r="8" fill="#141a20"/><circle cx="58" cy="42" r="8" fill="#141a20"/>
+                  </g>
+                </svg>
+              </div>
+              <figcaption><span>Pacific Coast</span><span>1997</span></figcaption>
+            </figure>
+            <figure class="frame" data-i="2">
+              <div class="frame__img">
+                <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020308"/><stop offset=".55" stop-color="#0a1238"/><stop offset=".8" stop-color="#2c5fb8"/><stop offset="1" stop-color="#9cc4f0"/></linearGradient>
+                    <radialGradient id="s3earth" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#4c7fc4"/><stop offset=".25" stop-color="#2a4f8a"/><stop offset="1" stop-color="#0c1d3a"/></radialGradient>
+                    <radialGradient id="s3flare" cx=".22" cy=".2" r=".35"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".2" stop-color="#ffe9b0" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="400" height="520" fill="url(#s3sky)"/>
+                  <ellipse cx="200" cy="1180" rx="980" ry="800" fill="url(#s3earth)"/>
+                  <ellipse cx="200" cy="1180" rx="980" ry="800" fill="none" stroke="#a9d3ff" stroke-opacity=".6" stroke-width="5"/>
+                  <g fill="#fff" fill-opacity=".85"><path d="M60 430 q40 -12 90 -4 q-30 14 -90 4Z"/><path d="M230 410 q50 -10 110 2 q-60 12 -110 -2Z"/><path d="M140 470 q60 -8 120 4 q-70 10 -120 -4Z"/></g>
+                  <rect width="400" height="520" fill="url(#s3flare)"/>
+                  <path d="M0 0 H34 V520 H0Z" fill="#11151c"/>
+                  <path d="M366 0 H400 V520 H366Z" fill="#11151c"/>
+                  <path d="M34 0 H366 V18 Q200 40 34 18Z" fill="#1a1f28"/>
+                  <g transform="translate(176 300)"><path d="M10 0 q14 -6 22 4 l2 30 l-4 26 h-8 l-2 -22 l-4 22 h-8 l0 -26 z" fill="#e9e6df"/><circle cx="21" cy="-6" r="9" fill="#d9d5cc"/></g>
+                </svg>
+              </div>
+              <figcaption><span>Stratosphere</span><span>2012</span></figcaption>
+            </figure>
+            <figure class="frame" data-i="3">
+              <div class="frame__img">
+                <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="s4sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1446"/><stop offset=".6" stop-color="#4b3a7a"/><stop offset="1" stop-color="#e3866a"/></linearGradient>
+                  </defs>
+                  <rect width="400" height="520" fill="url(#s4sky)"/>
+                  <circle cx="300" cy="120" r="2" fill="#fff"/><circle cx="90" cy="80" r="1.5" fill="#fff"/><circle cx="200" cy="50" r="1.2" fill="#fff"/><circle cx="350" cy="190" r="1.4" fill="#fff"/>
+                  <g fill="#120f2a">
+                    <rect x="0" y="300" width="60" height="220"/><rect x="56" y="240" width="48" height="280"/><rect x="100" y="320" width="54" height="200"/>
+                    <rect x="150" y="200" width="44" height="320"/><rect x="190" y="280" width="64" height="240"/><rect x="250" y="230" width="40" height="290"/>
+                    <rect x="286" y="310" width="58" height="210"/><rect x="340" y="260" width="60" height="260"/>
+                  </g>
+                  <g fill="#ffd27a" fill-opacity=".85">
+                    <rect x="64" y="260" width="6" height="8"/><rect x="80" y="290" width="6" height="8"/><rect x="64" y="330" width="6" height="8"/>
+                    <rect x="160" y="220" width="6" height="8"/><rect x="176" y="250" width="6" height="8"/><rect x="160" y="300" width="6" height="8"/><rect x="176" y="360" width="6" height="8"/>
+                    <rect x="258" y="250" width="6" height="8"/><rect x="272" y="290" width="6" height="8"/><rect x="258" y="340" width="6" height="8"/>
+                    <rect x="350" y="280" width="6" height="8"/><rect x="368" y="320" width="6" height="8"/><rect x="200" y="300" width="6" height="8"/><rect x="226" y="330" width="6" height="8"/>
+                  </g>
+                  <rect y="470" width="400" height="50" fill="#0a0820"/>
+                </svg>
+              </div>
+              <figcaption><span>177 countries</span><span>Today</span></figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <ol class="story__years" id="storyYears">
+          <li class="is-active">1987</li><li>1997</li><li>2012</li><li>Today</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 06 PRESS ============ -->
+    <section class="press" id="press" data-theme="dark" data-index="6">
+      <div class="press__inner">
+        <p class="eyebrow reveal">05 — Press</p>
+        <h2 class="display press__title reveal">Widely noticed<i class="dot">.</i></h2>
+        <div class="press__quotes">
+          <blockquote class="quote reveal">
+            <p>“A product whose reputation sometimes runs ahead of the drink, and somehow the drink keeps up.”</p>
+            <cite>The Altitude Review</cite>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <p>“Thirty-odd years in, it still looks like the future of the fridge.”</p>
+            <cite>Paddock</cite>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <p>“Found next to more night-desk keyboards than anyone will admit to.”</p>
+            <cite>Night Shift</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Paddock</span><i></i><span>Night Shift</span><i></i><span>Field &amp; Sky</span><i></i><span>Sunday Gazette</span><i></i><span>The Altitude Review</span><i></i><span>Longform</span><i></i>
+          <span>Paddock</span><i></i><span>Night Shift</span><i></i><span>Field &amp; Sky</span><i></i><span>Sunday Gazette</span><i></i><span>The Altitude Review</span><i></i><span>Longform</span><i></i>
+        </div>
+      </div>
+      <div class="marquee marquee--rev" aria-hidden="true">
+        <div class="marquee__track">
+          <span>The Altitude Review</span><i></i><span>Longform</span><i></i><span>Sunday Gazette</span><i></i><span>Paddock</span><i></i><span>Field &amp; Sky</span><i></i><span>Night Shift</span><i></i>
+          <span>The Altitude Review</span><i></i><span>Longform</span><i></i><span>Sunday Gazette</span><i></i><span>Paddock</span><i></i><span>Field &amp; Sky</span><i></i><span>Night Shift</span><i></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 REACH ============ -->
+    <section class="reach" id="reach" data-theme="light" data-index="7">
+      <p class="eyebrow reveal">Wherever the day goes</p>
+      <h2 class="display reach__title reveal">In 177 countries, or direct to your door<i class="dot">.</i></h2>
+      <div class="reach__stats">
+        <div class="stat reveal"><b data-count="177">0</b><span class="label">Countries</span><p>From Fuschl am See to almost everywhere with a fridge.</p></div>
+        <div class="stat reveal"><b data-count="12" data-suffix="bn">0</b><span class="label">Cans a year</span><p>Give or take, every year, in every kind of weather.</p></div>
+        <div class="stat reveal"><b data-count="1987" data-plain>0</b><span class="label">First can</span><p>The recipe has barely moved since.</p></div>
+        <div class="stat reveal"><b data-count="250" data-suffix="ml">0</b><span class="label">The original</span><p>Seasonal editions rotate through the year. The original stays.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ 08 SHOP ============ -->
+    <section class="shop" id="shop" data-theme="light" data-index="8">
+      <header class="shop__head">
+        <div>
+          <p class="eyebrow reveal">06 — Shop</p>
+          <h2 class="serif-xl reveal">Order direct<i class="dot">.</i></h2>
+        </div>
+        <p class="label shop__note reveal">Free delivery over €40 · Ships in 48 h</p>
+      </header>
+
+      <div class="shop__grid">
+        <article class="product reveal" data-id="classic" data-name="Energy Drink" style="--tint:#e2e4ee">
+          <div class="product__media"><div data-can="classic"></div></div>
+          <div class="product__info">
+            <p class="product__title"><span class="code">Red Bull.01</span><span class="product__name">Energy Drink</span></p>
+            <p class="product__line">The original formula</p>
+            <div class="packs" role="radiogroup" aria-label="Pack size">
+              <button type="button" class="pack is-active" data-pack="4" data-price="8.99">4-pack</button>
+              <button type="button" class="pack" data-pack="12" data-price="24.99">12-pack</button>
+              <button type="button" class="pack" data-pack="24" data-price="46.99">24-pack</button>
+            </div>
+            <p class="product__price"><b>€8.99</b><span>/ 4 cans</span></p>
+            <button type="button" class="btn btn--block" data-add>Add to cart</button>
+          </div>
+        </article>
+        <article class="product reveal" data-id="red" data-name="Red Edition" style="--tint:#f5dcd8">
+          <div class="product__media"><div data-can="red"></div></div>
+          <div class="product__info">
+            <p class="product__title"><span class="code">Red Bull.02</span><span class="product__name">Red Edition</span></p>
+            <p class="product__line">Watermelon</p>
+            <div class="packs" role="radiogroup" aria-label="Pack size">
+              <button type="button" class="pack is-active" data-pack="4" data-price="8.99">4-pack</button>
+              <button type="button" class="pack" data-pack="12" data-price="24.99">12-pack</button>
+              <button type="button" class="pack" data-pack="24" data-price="46.99">24-pack</button>
+            </div>
+            <p class="product__price"><b>€8.99</b><span>/ 4 cans</span></p>
+            <button type="button" class="btn btn--block" data-add>Add to cart</button>
+          </div>
+        </article>
+        <article class="product reveal" data-id="blue" data-name="Blue Edition" style="--tint:#dfe2f4">
+          <div class="product__media"><div data-can="blue"></div></div>
+          <div class="product__info">
+            <p class="product__title"><span class="code">Red Bull.03</span><span class="product__name">Blue Edition</span></p>
+            <p class="product__line">Blueberry</p>
+            <div class="packs" role="radiogroup" aria-label="Pack size">
+              <button type="button" class="pack is-active" data-pack="4" data-price="8.99">4-pack</button>
+              <button type="button" class="pack" data-pack="12" data-price="24.99">12-pack</button>
+              <button type="button" class="pack" data-pack="24" data-price="46.99">24-pack</button>
+            </div>
+            <p class="product__price"><b>€8.99</b><span>/ 4 cans</span></p>
+            <button type="button" class="btn btn--block" data-add>Add to cart</button>
+          </div>
+        </article>
+        <article class="product reveal" data-id="yellow" data-name="Yellow Edition" style="--tint:#f5eed0">
+          <div class="product__media"><div data-can="yellow"></div></div>
+          <div class="product__info">
+            <p class="product__title"><span class="code">Red Bull.04</span><span class="product__name">Yellow Edition</span></p>
+            <p class="product__line">Tropical fruits</p>
+            <div class="packs" role="radiogroup" aria-label="Pack size">
+              <button type="button" class="pack is-active" data-pack="4" data-price="8.99">4-pack</button>
+              <button type="button" class="pack" data-pack="12" data-price="24.99">12-pack</button>
+              <button type="button" class="pack" data-pack="24" data-price="46.99">24-pack</button>
+            </div>
+            <p class="product__price"><b>€8.99</b><span>/ 4 cans</span></p>
+            <button type="button" class="btn btn--block" data-add>Add to cart</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" data-theme="dark">
+    <div class="footer__top">
+      <p class="serif-l">Gives you wings<i class="dot">.</i></p>
+      <nav class="footer__cols">
+        <div><span class="label">Explore</span><a href="#editions">Editions</a><a href="#inside">Inside</a><a href="#story">Story</a></div>
+        <div><span class="label">Shop</span><a href="#shop">Order direct</a><a href="#shop">Multipacks</a><a href="#reach">Delivery</a></div>
+        <div><span class="label">Follow</span><a href="#top">Instagram</a><a href="#top">YouTube</a><a href="#top">TikTok</a></div>
+      </nav>
+    </div>
+    <p class="display footer__word">Red Bull<i class="dot">.</i></p>
+    <div class="footer__bottom">
+      <span>Independent concept design. Not affiliated with or endorsed by Red Bull GmbH; "Red Bull" is a trademark of its owner.</span>
+      <span>© <span id="year">2026</span></span>
+    </div>
+  </footer>
+
+  <!-- ============ CART ============ -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__scrim" data-close></div>
+    <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <header class="drawer__head">
+        <h2 id="drawerTitle" class="serif-m">Your order<i class="dot">.</i></h2>
+        <button type="button" class="drawer__close" data-close>Close</button>
+      </header>
+      <ul class="drawer__items" id="cartItems"></ul>
+      <p class="drawer__empty" id="cartEmpty">Nothing here yet.</p>
+      <footer class="drawer__foot">
+        <div class="drawer__total"><span class="label">Subtotal</span><b id="cartTotal">€0.00</b></div>
+        <button type="button" class="btn btn--block" disabled>Checkout</button>
+        <p class="drawer__note">Concept store. Checkout is disabled.</p>
+      </footer>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

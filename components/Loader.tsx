@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 /** Info pills: centre position (% of viewport), dark/light variant, entry order. */
-const PILLS: { label: string; x: number; y: number; dark: boolean; o: number }[] = [
-  { label: "80 mg caffeine", x: 18.5, y: 23, dark: true, o: 0 },
-  { label: "Fuschl am See, Austria", x: 82.3, y: 19.7, dark: false, o: 1 },
-  { label: "Taurine 1,000 mg", x: 83.7, y: 45.5, dark: true, o: 2 },
-  { label: "Since 1987", x: 12.7, y: 47.2, dark: false, o: 3 },
-  { label: "Alpine water", x: 74.1, y: 77.3, dark: true, o: 4 },
-  { label: "250 ml", x: 14.8, y: 73.3, dark: false, o: 5 },
-  { label: "Gives you wings", x: 44.6, y: 13.5, dark: true, o: 6 },
+const PILLS: { label: string; x: number; y: number; mx: number; my: number; dark: boolean; o: number }[] = [
+  { label: "80 mg caffeine", x: 18.5, y: 23, mx: 28, my: 28, dark: true, o: 0 },
+  { label: "Fuschl am See, Austria", x: 82.3, y: 19.7, mx: 62, my: 20, dark: false, o: 1 },
+  { label: "Taurine 1,000 mg", x: 83.7, y: 45.5, mx: 64, my: 36, dark: true, o: 2 },
+  { label: "Since 1987", x: 12.7, y: 47.2, mx: 30, my: 64, dark: false, o: 3 },
+  { label: "Alpine water", x: 74.1, y: 77.3, mx: 68, my: 73, dark: true, o: 4 },
+  { label: "250 ml", x: 14.8, y: 73.3, mx: 26, my: 80, dark: false, o: 5 },
+  { label: "Gives you wings", x: 44.6, y: 13.5, mx: 50, my: 12, dark: true, o: 6 },
 ];
 
 /** Non-linear "real loading" progress: stalls and jumps. */
@@ -110,8 +110,8 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       {PILLS.map((p) => (
         <span
           key={p.label}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${p.x}%`, top: `${p.y}%` }}
+          className="loader-pill-pos absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ "--x": `${p.x}%`, "--y": `${p.y}%`, "--mx": `${p.mx}%`, "--my": `${p.my}%` } as React.CSSProperties}
         >
           <span
             className="pill"

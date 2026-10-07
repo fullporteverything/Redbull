@@ -17,8 +17,8 @@ export default function Reach() {
           Wherever the day goes
         </p>
         <h2 className="reach__title">
-          <span className="line">In 177 countries, or</span>
-          <span className="line">direct to your</span>
+          <span className="line">In 177 countries, or</span>{" "}
+          <span className="line">direct to your</span>{" "}
           <span className="line">
             door<i className="sq-dot" aria-hidden />
             <span className="sr-only">.</span>

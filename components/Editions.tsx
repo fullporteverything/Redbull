@@ -51,7 +51,7 @@ export default function Editions() {
         const local = Math.min(1, Math.max(0, (p - a) / (b - a)));
         cans.current.forEach((c, k) => c?.style.setProperty("--lift", k === idx ? `${(-12 * local).toFixed(1)}px` : "0px"));
         // ticks follow continuous progress
-        const f = p * 4;
+        const f = idx + local;
         ticks.current.forEach((t, j) => {
           if (t) t.style.opacity = String(0.25 + 0.75 * Math.max(0, Math.min(1, 1 - Math.abs(f - (j + 0.5)))));
         });

@@ -65,7 +65,9 @@ export default function Story() {
               </div>
               <figcaption>
                 <i />
-                Fig. 0{k + 1} — {c.place}, <span>{c.year}</span>
+                <span className="frame__cap">
+                  Fig. 0{k + 1} — {c.place}, <em>{c.year}</em>
+                </span>
               </figcaption>
             </figure>
           ))}
